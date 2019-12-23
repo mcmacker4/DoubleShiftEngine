@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <cstring>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -9,7 +11,7 @@
 #define HEIGHT 720
 
 static const char* SHADER_V =
-        "#version 330 core"
+        "#version 430 core\n"
         "layout(location = 0) in vec3 position;"
         "out vec3 _position;"
         "void main() {"
@@ -17,11 +19,11 @@ static const char* SHADER_V =
         "    _position = position;"
         "}";
 static const char* SHADER_F =
-        "#version 330 core"
+        "#version 430 core\n"
         "in vec3 _position;"
         "out vec4 color;"
         "void main() {"
-        "   color = vec4(position * 2, 1.0);"
+        "   color = vec4(_position * 2, 1.0);"
         "}";
 
 inline void fatal(const char* message) {
@@ -61,23 +63,30 @@ int main() {
 
     glClearColor(0.3f, 0.6f, 0.9f, 1.0f);
 
-    Shader vShader(GL_VERTEX_SHADER, SHADER_V, strlen(SHADER_V));
-    Shader fShader(GL_FRAGMENT_SHADER, SHADER_F, strlen(SHADER_F));
+    try {
 
-    ShaderProgram program(vShader, fShader);
-    ShaderProgram::Start(program);
+        Shader vShader(GL_VERTEX_SHADER, SHADER_V, strlen(SHADER_V));
+        Shader fShader(GL_FRAGMENT_SHADER, SHADER_F, strlen(SHADER_F));
 
-    glfwShowWindow(window);
+        ShaderProgram program(vShader, fShader);
+        ShaderProgram::Start(program);
 
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
+        glfwShowWindow(window);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        while (!glfwWindowShouldClose(window)) {
+            glfwPollEvents();
 
-        glfwSwapBuffers(window);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            glfwSwapBuffers(window);
+        }
+
+        ShaderProgram::Stop();
+
+    } catch (ShaderError& error) {
+        std::cout << "Shader Error!" << std::endl;
+        std::cout << error.what() << std::endl;
     }
-
-    ShaderProgram::Stop();
 
     glfwDestroyWindow(window);
 

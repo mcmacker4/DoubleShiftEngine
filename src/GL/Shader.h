@@ -29,8 +29,11 @@ class ShaderError : public std::exception {
     std::string message;
 public:
     explicit ShaderError(std::string message)
-        : std::exception(message.c_str()),
-        message(std::move(message)) {}
+        : message(std::move(message)) {}
+
+    const char * what() const noexcept override {
+        return message.c_str();
+    }
 };
 
 #endif //DOUBLESHIFT_SHADER_H
