@@ -3,7 +3,7 @@ project(DoubleShift)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(DoubleShift src/main.cpp)
+add_executable(DoubleShift src/main.cpp src/GL/Shader.cpp src/GL/Shader.h src/GL/ShaderProgram.cpp src/GL/ShaderProgram.h)
 
 # OPENGL
 find_package(OpenGL REQUIRED)

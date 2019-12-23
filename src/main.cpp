@@ -3,8 +3,26 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "GL/ShaderProgram.h"
+
 #define WIDTH 1280
 #define HEIGHT 720
+
+static const char* SHADER_V =
+        "#version 330 core"
+        "layout(location = 0) in vec3 position;"
+        "out vec3 _position;"
+        "void main() {"
+        "    gl_Position = vec4(position, 1.0);"
+        "    _position = position;"
+        "}";
+static const char* SHADER_F =
+        "#version 330 core"
+        "in vec3 _position;"
+        "out vec4 color;"
+        "void main() {"
+        "   color = vec4(position * 2, 1.0);"
+        "}";
 
 inline void fatal(const char* message) {
     std::cerr << message << std::endl;
@@ -12,7 +30,7 @@ inline void fatal(const char* message) {
 }
 
 void error_callback(int code, const char* message) {
-    std::cerr << message << std::endl;
+    std::cerr << "GLFW(E:" << code << "): " << message << std::endl;
 }
 
 int main() {
@@ -43,6 +61,12 @@ int main() {
 
     glClearColor(0.3f, 0.6f, 0.9f, 1.0f);
 
+    Shader vShader(GL_VERTEX_SHADER, SHADER_V, strlen(SHADER_V));
+    Shader fShader(GL_FRAGMENT_SHADER, SHADER_F, strlen(SHADER_F));
+
+    ShaderProgram program(vShader, fShader);
+    ShaderProgram::Start(program);
+
     glfwShowWindow(window);
 
     while (!glfwWindowShouldClose(window)) {
@@ -52,6 +76,8 @@ int main() {
 
         glfwSwapBuffers(window);
     }
+
+    ShaderProgram::Stop();
 
     glfwDestroyWindow(window);
 
