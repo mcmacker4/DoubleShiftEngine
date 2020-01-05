@@ -9,10 +9,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(BUILD_STATIC_LIBS 1)
-set(BUILD_SHARED_LIBS 0)
-
-add_executable(DoubleShift src/main.cpp src/Window.cpp src/Window.h src/error/DSError.h src/entity/Entity.cpp src/entity/Entity.h)
+add_executable(DoubleShift src/main.cpp src/Window.cpp src/Window.h src/error/DSError.h)
 
 # OPENGL
 find_package(OpenGL REQUIRED)
@@ -45,7 +42,12 @@ else()
 endif()
 
 # GLM
-add_subdirectory(lib/glm)
-target_link_libraries(DoubleShift glm)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(GLM_TEST_ENABLE OFF CACHE BOOL "" FORCE)
 
+add_subdirectory(lib/glm)
+target_link_libraries(DoubleShift glm_static)
+list(APPEND INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/lib/glm")
+
+# Include Directories
 target_include_directories(DoubleShift PUBLIC "${PROJECT_BINARY_DIR}" ${INCLUDE_DIRS})
