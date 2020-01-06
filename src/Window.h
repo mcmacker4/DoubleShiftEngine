@@ -5,11 +5,7 @@
 #ifndef DOUBLESHIFT_WINDOW_H
 #define DOUBLESHIFT_WINDOW_H
 
-#ifdef USE_GLEW
-#include <GL/glew.h>
-#else
 #include <glad/glad.h>
-#endif
 #include <GLFW/glfw3.h>
 
 class Window {
@@ -23,6 +19,9 @@ public:
 
     static bool ShouldClose();
     static void SwapBuffers();
+
+    static void OnError(int, const char*);
+    static void OnResize(GLFWwindow*, int, int);
 };
 
 

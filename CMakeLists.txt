@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(DoubleShift)
 
-option(USE_GLEW "Use GLEW instead of GLAD for OpenGL Bindings." OFF)
+# option(USE_GLEW "Use GLEW instead of GLAD for OpenGL Bindings." OFF)
 
 if(USE_GLEW)
     add_definitions(-DUSE_GLEW)
@@ -9,7 +9,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(DoubleShift src/main.cpp src/Window.cpp src/Window.h src/error/DSError.h)
+add_executable(DoubleShift src/main.cpp src/Window.cpp src/Window.h src/error/DSError.h src/gl/VAO.cpp src/gl/VAO.h src/gl/GLObject.h src/gl/VBO.cpp src/gl/VBO.h src/gl/Shader.cpp src/gl/Shader.h src/gl/ShaderProgram.cpp src/gl/ShaderProgram.h)
 
 # OPENGL
 find_package(OpenGL REQUIRED)
@@ -30,16 +30,18 @@ add_subdirectory(lib/glfw)
 target_link_libraries(DoubleShift glfw)
 list(APPEND INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/lib/glfw/include")
 
-if (USE_GLEW)
-    # GLEW
-    add_subdirectory(lib/glew/build/cmake)
-    target_link_libraries(DoubleShift glew_s)
-    list(APPEND INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/lib/glew/include")
-else()
-    # GLAD
-    add_subdirectory(lib/glad)
-    target_link_libraries(DoubleShift glad)
-endif()
+#if (USE_GLEW)
+#    # GLEW
+#    add_subdirectory(lib/glew/build/cmake)
+#    target_link_libraries(DoubleShift glew_s)
+#    list(APPEND INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/lib/glew/include")
+#else()
+
+# GLAD
+add_subdirectory(lib/glad)
+target_link_libraries(DoubleShift glad)
+
+#endif()
 
 # GLM
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
