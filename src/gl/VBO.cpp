@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 05/01/2020.
-//
-
 #include "VBO.h"
 
 #include <glad/glad.h>

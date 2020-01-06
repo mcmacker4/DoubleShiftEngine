@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 05/01/2020.
-//
-
 #ifndef DOUBLESHIFT_GLOBJECT_H
 #define DOUBLESHIFT_GLOBJECT_H
 

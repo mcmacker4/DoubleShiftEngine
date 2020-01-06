@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 06/01/2020.
-//
-
 #include "ShaderProgram.h"
 #include "../error/DSError.h"
 

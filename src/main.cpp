@@ -37,15 +37,6 @@ int main() {
 
     Window::Create(WIDTH, HEIGHT);
 
-//    std::vector<float> vertices {
-//        -0.5f, 0.5f, 0.0f,
-//        -0.5f, -0.5f, 0.0f,
-//        0.5f, -0.5f, 0.0f,
-//        -0.5f, 0.5f, 0.0f,
-//        0.5f, -0.5f, 0.0f,
-//        0.5f, 0.5f, 0.0f
-//    };
-
     std::vector<float> vertices {
         0.0f, 0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
@@ -55,7 +46,7 @@ int main() {
     VBO vbo(GL_ARRAY_BUFFER, vertices);
 
     VAO vao;
-    vao.SetAttribute(0, 3, vbo);
+    vao.SetAttribute(POSITION, 3, vbo);
 
     std::string vShaderSrc(vShaderSrcC);
     Shader vShader(GL_VERTEX_SHADER, vShaderSrc);

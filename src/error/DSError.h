@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 03/01/2020.
-//
-
 #ifndef DOUBLESHIFT_DSERROR_H
 #define DOUBLESHIFT_DSERROR_H
 

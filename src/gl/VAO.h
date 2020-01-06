@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 05/01/2020.
-//
-
 #ifndef DOUBLESHIFT_VAO_H
 #define DOUBLESHIFT_VAO_H
 

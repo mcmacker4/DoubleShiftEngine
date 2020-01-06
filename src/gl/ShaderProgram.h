@@ -1,7 +1,3 @@
-//
-// Created by McMacker4 on 06/01/2020.
-//
-
 #ifndef DOUBLESHIFT_SHADERPROGRAM_H
 #define DOUBLESHIFT_SHADERPROGRAM_H
 
